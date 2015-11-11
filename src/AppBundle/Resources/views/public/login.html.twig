@@ -1,0 +1,20 @@
+{% extends 'AppBundle:user:base.html.twig' %}
+
+{% block body %}
+	<div id="wrapper">
+		<form action="{{ path('login_check') }}" method="post">
+			{% if error %}
+				<div><strong>{{ error.message }}</strong></div>
+			{% endif %}
+
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="_username" >
+			<label for="password">Password:</label>
+			<input type="password" id="password"  name="_password" >
+
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<a href="{{ url('register') }}">Register</a>
+{% endblock %}
+

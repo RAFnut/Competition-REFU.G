@@ -1,0 +1,10 @@
+{% extends 'AppBundle:user:base.html.twig' %}
+
+{% block body %}
+	<div id="wrapper">
+		<form action="{{ path('register') }}" method="post" {{ form_enctype(form) }}>
+		{{ form_widget(form) }}
+</form>
+	</div>
+{% endblock %}
+
