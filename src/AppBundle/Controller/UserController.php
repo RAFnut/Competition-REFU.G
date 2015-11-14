@@ -42,8 +42,43 @@ class UserController extends Controller
      */
     public function updateStatusAction(Request $request)
     {
-
         return $this->render('AppBundle:user:update-status.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/news", name="news")
+     */
+    public function newsAction(Request $request)
+    {
+        return $this->render('AppBundle:user:news.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/important-info", name="importantInfo")
+     */
+    public function importantInfoAction(Request $request)
+    {
+        return $this->render('AppBundle:user:important-info.html.twig', array(
+        ));
+    }
+    
+    /**
+     * @Route("/profile/{id}", requirements={"id" = "\d+"}, name="profile")
+     */
+    public function profileAction(Request $request, $id = -1)
+    {
+        return $this->render('AppBundle:user:profile.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/list-people", name="listPeople")
+     */
+    public function listPeopleAction(Request $request)
+    {
+        return $this->render('AppBundle:user:list-people.html.twig', array(
         ));
     }
 }
