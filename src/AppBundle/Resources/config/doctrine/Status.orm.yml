@@ -18,6 +18,9 @@ AppBundle\Entity\Status:
       type: string
       length: 32
       nullable: false
+    date:
+      type: datetime
+      nullable: false
   manyToOne:
     city:
       targetEntity: City
