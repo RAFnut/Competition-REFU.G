@@ -23,7 +23,13 @@ class UserType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'New Password'),
                 'second_options' => array('label' => 'Repeat Password'),
-            ));
+            ))
+            ->add('full_name', 'text')
+            ->add('dob', 'birthday')
+            ->add('email', 'email')
+            ->add('gender', 'text')
+            ->add('number', 'text')
+            ->add('picture', 'text')
         ;
     }
     

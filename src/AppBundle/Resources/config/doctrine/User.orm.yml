@@ -19,3 +19,41 @@ AppBundle\Entity\User:
       type: string
       length: 32
       nullable: false
+    full_name:
+      type: string
+      length: 32
+      nullable: false
+    dob:
+      type: datetime
+      nullable: false
+    email:
+      type: string
+      length: 32
+      nullable: false
+    gender:
+      type: string
+      length: 32
+      nullable: false
+    number:
+      type: string
+      length: 32
+      nullable: false
+    picture:
+      type: string
+      length: 32
+      nullable: false
+  manyToMany:
+    peopleIFollow:
+      targetEntity: User
+      joinTable:
+        name: following
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          followed_user_id:
+            referencedColumnName: id
+  oneToMany:
+    statuses:
+      targetEntity: Status
+      mappedBy: id
