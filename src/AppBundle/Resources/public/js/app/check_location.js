@@ -1,8 +1,11 @@
 var pinStringContainer = $(".geo-location-current-pin-string");
-
+var latitudeCord;
+var longitudeCord;
 function getLocationFromUser() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+        latitudeCord = showPosition.coords.latitude;
+        longitudeCord = showPosition.coords.longitude;
     }
     else {
         pinStringContainer.append("Geolocation is not supported by this browser.");
