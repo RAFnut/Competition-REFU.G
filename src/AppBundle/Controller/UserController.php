@@ -48,6 +48,7 @@ class UserController extends Controller
      */
     public function newsAction(Request $request)
     {
+        $news = $self->findNews($this->getUser()->getStatuses()->last()->getCity()->getName());
         return $this->render('AppBundle:user:news.html.twig', array(
         ));
     }
@@ -77,5 +78,20 @@ class UserController extends Controller
     {
         return $this->render('AppBundle:user:list-people.html.twig', array(
         ));
+    }
+
+    /**
+     * @Route("/people-i-follow", name="peopleIFollow")
+     */
+    public function listPeopleAction(Request $request)
+    {
+        $users = $this->getUser()->getPeopleIFollow();
+        return $this->render('AppBundle:user:people-i-follow.html.twig', array(
+            'users'   => $users,
+            ));
+    }
+
+    public function findNews($name){
+        
     }
 }
