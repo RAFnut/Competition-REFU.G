@@ -21,4 +21,4 @@ AppBundle\Entity\City:
   oneToMany:
     statuses:
       targetEntity: Status
-      mappedBy: id
+      mappedBy: city

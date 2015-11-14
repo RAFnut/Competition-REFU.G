@@ -56,4 +56,4 @@ AppBundle\Entity\User:
   oneToMany:
     statuses:
       targetEntity: Status
-      mappedBy: id
+      mappedBy: user

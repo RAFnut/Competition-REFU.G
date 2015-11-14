@@ -12,6 +12,12 @@
 	<div class="geo-location-current-pin-string">
 	</div>
 
+	<div>
+		{% for status in statuses|reverse %}
+			{{ status.note }} <br>
+		{% endfor %}
+	</div>
+
 {% endblock %}
 
 {% block javascripts %}
