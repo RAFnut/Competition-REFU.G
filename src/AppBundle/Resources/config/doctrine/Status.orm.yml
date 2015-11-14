@@ -27,8 +27,10 @@ AppBundle\Entity\Status:
       joinColumn:
         name: city_id
         referencedColumnName: id
+      inversedBy: statuses
     user:
       targetEntity: User
       joinColumn:
         name: user_id
         referencedColumnName: id
+      inversedBy: statuses

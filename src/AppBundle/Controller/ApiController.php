@@ -42,6 +42,9 @@ class ApiController extends Controller
     {
         $json = $request->request->get('status');
         $status = $this->deserialize(json_encode($json), 'AppBundle\Entity\Status');
+
+        $status->setUser($this->getUser());
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($status);
         $em->flush();

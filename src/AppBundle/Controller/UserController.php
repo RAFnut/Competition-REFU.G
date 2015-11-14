@@ -39,7 +39,15 @@ class UserController extends Controller
      */
     public function updateStatusAction(Request $request)
     {
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Status');
+        $qb   = $repo->createQueryBuilder('s');
+
+        $qb->andWhere('s.user = :id');
+        $qb->setParameter('id', $this->getUser());
+
+        $statuses = $qb->getQuery()->getResult(); 
         return $this->render('AppBundle:user:update-status.html.twig', array(
+            "statuses" => $statuses,
         ));
     }
 

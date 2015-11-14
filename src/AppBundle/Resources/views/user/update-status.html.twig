@@ -182,6 +182,12 @@
         </div>
 
 
+	<div>
+		{% for status in statuses|reverse %}
+			{{ status.note }} <br>
+		{% endfor %}
+	</div>
+
 {% endblock %}
 
 {% block javascripts %}
