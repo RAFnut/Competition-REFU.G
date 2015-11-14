@@ -11,6 +11,9 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
+
 /**
  * @Route("/app", name="app")
  */
@@ -97,6 +100,42 @@ class UserController extends Controller
         return $this->render('AppBundle:user:people-i-follow.html.twig', array(
             'users'   => $users,
             ));
+    }
+
+    /**
+     * @Route("/profileChange", name="profileChange")
+     */
+    public function profileChangeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createUserForm($user);
+        $form->handleRequest($request); 
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+           
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('profile'));        
+        }
+
+        return $this->render('AppBundle:user:edit.html.twig', array(
+            'form'   => $form->createView(),
+            'user'   => $user,
+        ));
+    }
+
+    private function createUserForm(User $user)
+    {
+        $form = $this->createForm(new UserType(), $user, array(
+            'action' => $this->generateUrl('profileChange'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update my changes'));
+
+        return $form;
     }
 
     public function findNews($name){

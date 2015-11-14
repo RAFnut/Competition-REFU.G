@@ -213,4 +213,33 @@ class Status
     {
         return $this->user;
     }
+    /**
+     * @var \DateTime
+     */
+    private $date;
+
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Status
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 }
