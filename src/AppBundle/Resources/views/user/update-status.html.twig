@@ -1,1 +1,27 @@
-{# update-status #}
+{% extends 'AppBundle:public:base.html.twig' %}
+
+{% block body %}
+
+	{# vazno mi je samo da neki element poput button-a ima getLocationFromUser #}
+	{# i da taj element bude .geo-location-current-location-button #}
+	<button onclick="getLocationFromUser()" class=".geo-location-current-location-button">
+		Get my current location
+	</button>
+
+	{# ovde se print-uje naziv mesta na kojem je pin #}
+	<div class="geo-location-current-pin-string">
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	{# geo-location service #}
+	<script>
+		/*
+			*Always include
+		*/
+		var _R = new _R();
+	</script>
+	<script src="{{ asset('bundles/app/js/app/check_location.js') }}"></script>
+{% endblock %}
