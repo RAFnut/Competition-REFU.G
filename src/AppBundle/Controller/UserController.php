@@ -91,7 +91,7 @@ class UserController extends Controller
     /**
      * @Route("/people-i-follow", name="peopleIFollow")
      */
-    public function listPeopleAction(Request $request)
+    public function peopleFollowAction(Request $request)
     {
         $users = $this->getUser()->getPeopleIFollow();
         return $this->render('AppBundle:user:people-i-follow.html.twig', array(
