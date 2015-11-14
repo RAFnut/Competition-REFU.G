@@ -13,7 +13,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body class="gray-bg">
+    <body {%block body_class%}{% endblock %}>
         {% block body %}{% endblock %}
         {% block javascripts %}
          <!-- Main scripts -->
@@ -21,6 +21,8 @@
         <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
         <script src="{{ asset('bundles/app/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/inspinia.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/plugins/pace/pace.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/app/_R.js') }}"></script>
         {% endblock %}
     </body>
