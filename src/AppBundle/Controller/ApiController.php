@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -40,10 +41,12 @@ class ApiController extends Controller
     public function updateStatusApiAction(Request $request)
     {
         $json = $request->request->get('status');
-        var_dump($json);
-        $status = $this->deserialize($json, 'AppBundle\Entity\Status');
-        var_dump($status);
-        return new JSONResponse('ok');
+        $status = $this->deserialize(json_encode($json), 'AppBundle\Entity\Status');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($status);
+        $em->flush();
+        $em->refresh($status);
+        return new JsonResponse('{id: '.$status->getId().'}');
     }
 
 }

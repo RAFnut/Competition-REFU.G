@@ -30,9 +30,6 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-        echo $this->serialize($this->getUser());
-
         return $this->render('AppBundle:user:index.html.twig', array(
         ));
     }
@@ -63,7 +60,7 @@ class UserController extends Controller
         return $this->render('AppBundle:user:important-info.html.twig', array(
         ));
     }
-    
+
     /**
      * @Route("/profile/{id}", requirements={"id" = "\d+"}, name="profile")
      */
