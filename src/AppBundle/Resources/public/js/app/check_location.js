@@ -4,13 +4,22 @@ var longitudeCord;
 function getLocationFromUser() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-        latitudeCord = showPosition.coords.latitude;
-        longitudeCord = showPosition.coords.longitude;
+
     }
     else {
         pinStringContainer.append("Geolocation is not supported by this browser.");
     }
 }
+
+function showPosition(position) {
+    latitudeCord = position.coords.latitude;
+    longitudeCord = position.coords.longitude;
+    pinStringContainer.append("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+    var reverseLookUp = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+    reverseLookUp += position.coords.latitude+","+position.coords.longitude;
+    _R.sendGET(reverseLookUp, reverseLookUpByCoords, _R.log);
+}
+
 
 function decodeLocationArray(results){
   city = "";
@@ -37,11 +46,4 @@ function decodeLocationArray(results){
 
 function reverseLookUpByCoords(results){
   console.log(decodeLocationArray(results));
-}
-
-function showPosition(position) {
-    pinStringContainer.append("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-    var reverseLookUp = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
-    reverseLookUp += position.coords.latitude+","+position.coords.longitude;
-    _R.sendGET(reverseLookUp, reverseLookUpByCoords, _R.log);
 }
