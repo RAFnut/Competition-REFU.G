@@ -16,19 +16,34 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
  */
 class UserController extends Controller
 {
+    private function serialize($object)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($object, 'json');
+        return $jsonContent;
+    }
+
     /**
      * @Route("/", name="app_home")
      */
     public function indexAction(Request $request)
     {
 
-		$encoders = array(new XmlEncoder(), new JsonEncoder());
-		$normalizers = array(new ObjectNormalizer());
-		$serializer = new Serializer($normalizers, $encoders);
-		$jsonContent = $serializer->serialize($this->getUser(), 'json');
-		echo $jsonContent;
+        echo $this->serialize($this->getUser());
 
         return $this->render('AppBundle:user:index.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/updateLocation", name="updateLocation")
+     */
+    public function updateLocationAction(Request $request)
+    {
+
+        return $this->render('AppBundle:user:update-location.html.twig', array(
         ));
     }
 }
