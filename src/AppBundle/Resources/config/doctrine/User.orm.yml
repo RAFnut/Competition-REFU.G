@@ -41,7 +41,7 @@ AppBundle\Entity\User:
     picture:
       type: string
       length: 32
-      nullable: false
+      nullable: true
   manyToMany:
     peopleIFollow:
       targetEntity: User
