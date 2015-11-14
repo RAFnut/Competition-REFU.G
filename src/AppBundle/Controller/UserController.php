@@ -38,12 +38,12 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/updateLocation", name="updateLocation")
+     * @Route("/update-status", name="updateStatus")
      */
-    public function updateLocationAction(Request $request)
+    public function updateStatusAction(Request $request)
     {
 
-        return $this->render('AppBundle:user:update-location.html.twig', array(
+        return $this->render('AppBundle:user:update-status.html.twig', array(
         ));
     }
 }
