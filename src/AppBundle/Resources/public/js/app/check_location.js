@@ -60,6 +60,8 @@ function decodeLocationArray(results){
       }
     }
   }
+
+  if (city == "") return country;
   tempstr = city+", "+country;
   return tempstr;
 }

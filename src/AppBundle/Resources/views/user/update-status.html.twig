@@ -4,9 +4,7 @@
 
 	{# vazno mi je samo da neki element poput button-a ima getLocationFromUser #}
 	{# i da taj element bude .geo-location-current-location-button #}
-	<button onclick="getLocationFromUser()" class=".geo-location-current-location-button">
-		Get my current location
-	</button>
+
 
 	{# ovde se print-uje naziv mesta na kojem je pin #}
 	<input class="geo-location-current-pin-string" disabled>
@@ -23,6 +21,10 @@
 			*Always include
 		*/
 		var _R = new _R();
+		$( document ).ready(function() {
+			getLocationFromUser();
+		});
+
 	</script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4ghAxerMi8q96VTY_B_F1MYibJsLKc7o"></script>
 	<script src="{{ asset('bundles/app/js/app/check_location.js') }}"></script>
