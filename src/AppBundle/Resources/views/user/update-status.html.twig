@@ -1,15 +1,188 @@
-{% extends 'AppBundle:public:base.html.twig' %}
+{% extends 'AppBundle:user:base.html.twig' %}
 
 {% block body %}
 
-	{# vazno mi je samo da neki element poput button-a ima getLocationFromUser #}
-	{# i da taj element bude .geo-location-current-location-button #}
 
+<div id="wrapper">
 
-	{# ovde se print-uje naziv mesta na kojem je pin #}
-	<input class="geo-location-current-pin-string" disabled>
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> </span> </a>
+                        
+                    </div>
+                </li>
+               
+                <li class="active">
+                    <a href="widgets.html"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
+                </li>
+                
+                <li>
+                    <a href="widgets.html"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
+                </li>
+                
+                <li>
+                    <a href="widgets.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span> </a>
+                </li>
+                
+                <li>
+                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
+                </li>
+                
+                <li>
+                    <a href="widgets.html"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
+                </li>
+                <li class="special_link">
+                    <a href="widgets.html"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
+                </li>
 
-	<div class="google-map" id="checkUserLocationMap"></div>
+               
+                
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2 style="margin-top:25px;">Update your status</h2>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Update your status so your friends and family know you are safe</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" class="form-horizontal">
+                                
+                                    <p>
+                                        Click "Find me" button under this map. It will auto locate you, and show you your current position on this map. 
+                                    </p>
+                                    <div class="google-map" id="checkUserLocationMap" style="margin-bottom:20px;"></div>
+                                
+                                <div class="form-group"><label class="col-sm-2 control-label" style="font-weight:normal; text-align:left;">Your location is:</label>
+
+                                    <div class="col-sm-10" style="padding-right:35px;"><input type="text" class="form-control geo-location-current-pin-string" disabled="" style="background: #FFFFFF;"></div>
+                                </div>
+                                
+                                
+                                <div class="form-group"><label class="col-sm-2 control-label" style="font-weight:normal; text-align:left; margin-top: -10px;">Descripbe your current status:</label>
+                                    <div class="col-sm-10"><textarea name="Text1" cols="40" rows="8"  class="form-control" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-sm-offset-10">
+                                        <button class="btn btn-primary" type="submit" style="float: right; ">Update status</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="wrapper wrapper-content animated fadeInRight" style="margin-top: -40px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Your past status and location updates.</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="feed-activity-list">
+                                        <div class="feed-element">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}">
+                                            </a>
+                                            <div class="media-body ">
+                                                <small class="pull-right">2h ago</small>
+                                                <strong>You</strong> updated your status near <strong>Nis, Srtbia</strong><br>
+                                                <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                <div class="well">
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                    Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="feed-element">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}">
+                                            </a>
+                                            <div class="media-body ">
+                                                <small class="pull-right">2h ago</small>
+                                                <strong>You</strong> updated your status near <strong>Nis, Srtbia</strong><br>
+                                                <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                <div class="well">
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                    Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="feed-element">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong>You</strong> were neare by <strong>Nis, Serbia</strong>. <br>
+                                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="footer">
+            <div class="pull-right">
+                Find your family. <strong>Reunite.</strong>
+            </div>
+            <div>
+                <strong>Copyright</strong> RAFnut 2015
+            </div>
+        </div>
+
+        </div>
+        </div>
+
 
 {% endblock %}
 
@@ -29,3 +202,4 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4ghAxerMi8q96VTY_B_F1MYibJsLKc7o"></script>
 	<script src="{{ asset('bundles/app/js/app/check_location.js') }}"></script>
 {% endblock %}
+
