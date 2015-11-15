@@ -45,6 +45,8 @@ class ApiController extends Controller
 
         $status->setUser($this->getUser());
 
+        $status->setDate(new \DateTime());
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($status);
         $em->flush();
