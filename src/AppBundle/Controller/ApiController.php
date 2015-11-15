@@ -71,6 +71,7 @@ class ApiController extends Controller
                 'from' => "RAFnut",
                 'text' => $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation()
             ]);
+            $url['text'] = iconv('UTF-8', 'ASCII//TRANSLIT', $url['text']);
             try {
                 $ch = curl_init($url);
                 if (FALSE === $ch)
@@ -147,6 +148,25 @@ class ApiController extends Controller
         }
 
         return new JsonResponse("He is not subscribed");
+    }
+
+    /**
+    * @Route("/picture", name="picture")
+    */
+    public function pictureUploadAction(Request $request)
+    {
+        $uri = $request->query->get('uri');
+
+        $user = $this->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $user->setPicture($uri);
+
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse("Success");
     }
 
 }
