@@ -21,23 +21,23 @@ AppBundle\Entity\User:
       nullable: false
     full_name:
       type: string
-      length: 32
+      length: 150
       nullable: false
     dob:
       type: datetime
-      nullable: false
+      nullable: true
     email:
       type: string
-      length: 32
-      nullable: false
+      length: 55
+      nullable: true
     gender:
       type: string
       length: 32
-      nullable: false
+      nullable: true
     number:
       type: string
       length: 32
-      nullable: false
+      nullable: true
     picture:
       type: string
       length: 32
