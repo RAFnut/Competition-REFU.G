@@ -127,8 +127,8 @@
     <script src="{{ asset('bundles/app/js/app/load_useful_map.js') }}"></script>
 	<script>
 		$( document ).ready(function() {
-        var LatituteLast = {% laststatus.ltd %};
-        var LangituteLast = {% laststatus.lng %};
+        var LatituteLast = {{ lastStatus.ltd }};
+        var LangituteLast = {{ lastStatus.lng }};
 				initialize();
 		});
 	</script>
