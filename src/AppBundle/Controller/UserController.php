@@ -59,7 +59,7 @@ class UserController extends Controller
      */
     public function newsAction(Request $request)
     {
-        $news = $self->findNews($this->getUser()->getStatuses()->last()->getCity()->getName());
+        $news = $self->findNews($this->getUser()->getStatuses()->last()->getLocation());
         return $this->render('AppBundle:user:news.html.twig', array(
         ));
     }
@@ -80,6 +80,9 @@ class UserController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $user = $repository->findOneById($id);
+
+        if (!($user)) $user=$this->getUser();
+
         return $this->render('AppBundle:user:profile.html.twig', array('user'=>$user
         ));
     }
