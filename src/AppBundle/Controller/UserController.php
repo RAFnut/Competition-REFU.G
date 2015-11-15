@@ -33,8 +33,7 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:user:index.html.twig', array(
-        ));
+        return $this->redirect($this->generateUrl('updateStatus'));
     }
 
     /**
@@ -145,7 +144,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/people-i-follow", name="peopleIFollow")
+     * @Route("/following", name="peopleIFollow")
      */
     public function peopleFollowAction(Request $request)
     {
@@ -157,7 +156,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/profileChange", name="profileChange")
+     * @Route("/profile-change", name="profileChange")
      */
     public function profileChangeAction(Request $request)
     {
@@ -189,6 +188,18 @@ class UserController extends Controller
         $form->add('submit', 'submit', array('label' => 'Update my changes'));
 
         return $form;
+    }
+    /**
+     * @Route("/wow", name="wow")
+     */
+    public function wowAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Status');
+        $statuses = $repo->findAll();
+        
+        return $this->render('AppBundle:user:wow.html.twig', array(
+            'statuses'   => $statuses,
+            ));
     }
 
     public function findNews($name){

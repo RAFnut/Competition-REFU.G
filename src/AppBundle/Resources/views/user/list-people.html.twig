@@ -28,7 +28,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
+                    <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important places</span> </a>
                 </li>
 
                 <li>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="search-result col-md-11">
                                     <h3><a href="profile/{{user.id}}" >{{ user.fullname }}</a></h3>
-                                    <a href="profile/{{user.id}}" class="search-link"><i class="fa fa-map-marker"></i> Last checked location: <strong> {% if user.statuses|length > 0 %}{{ user.statuses[0].location }}{% else %}N/A{% endif %} </strong></a>
+                                    <a href="profile/{{user.id}}" class="search-link"><i class="fa fa-map-marker"></i> Last checked location: <strong> {% if user.statuses|length > 0 %}{{ user.statuses.last.location }}{% else %}N/A{% endif %} </strong></a>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

@@ -69,9 +69,9 @@ class ApiController extends Controller
                 'api_secret' => "f9a926da",
                 'to' => $user->getNumber(),
                 'from' => "RAFnut",
-                'text' => $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation()
+                'text' => iconv('UTF-8', 'ASCII//TRANSLIT', 
+                    $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation())
             ]);
-            $url['text'] = iconv('UTF-8', 'ASCII//TRANSLIT', $url['text']);
             try {
                 $ch = curl_init($url);
                 if (FALSE === $ch)
@@ -97,7 +97,7 @@ class ApiController extends Controller
      */
     public function subscribeAction(Request $request)
     {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
 
@@ -126,7 +126,7 @@ class ApiController extends Controller
      */
     public function unsubscribeAction(Request $request)
     {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
 
