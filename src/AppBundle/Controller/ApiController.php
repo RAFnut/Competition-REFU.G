@@ -54,4 +54,62 @@ class ApiController extends Controller
         return new JsonResponse('{id: '.$status->getId().'}');
     }
 
+    /**
+     * @Route("/subscribe", name="subscribe")
+     */
+    public function subscribeAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $otherUser = $repository->findOneById($id);
+        
+        if (!($otherUser)){
+            return new JsonResponse("No user with that id");
+        }
+        $user = $this->getUser();
+
+        $nest = $otherUser->getPeopleIFollow();
+
+        if ($nest->contains($user)){
+            return new JsonResponse("He is already subscribed");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $otherUser->addPeopleIFollow($user);
+
+        $em->persist($otherUser);
+        $em->flush();
+        return new JsonResponse("Success");
+    }
+
+    /**
+     * @Route("/unsubscribe", name="unsubscribe")
+     */
+    public function unsubscribeAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $otherUser = $repository->findOneById($id);
+        
+        if (!($otherUser)){
+            return new JsonResponse("No user with that id");
+        }
+        $user = $this->getUser();
+
+        $nest = $otherUser->getPeopleIFollow();
+        
+        if ($nest->contains($user)){
+            $em = $this->getDoctrine()->getManager();
+
+            $otherUser->removePeopleIFollow($user);
+
+            $em->persist($otherUser);
+            $em->flush();
+            return new JsonResponse("Success");
+        }
+
+        return new JsonResponse("He is not subscribed");
+    }
+
 }

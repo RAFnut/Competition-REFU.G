@@ -28,7 +28,7 @@ class UserType extends AbstractType
             ->add('dob', 'birthday')
             ->add('email', 'email')
             ->add('gender', 'choice', array('choices' => array('male' => 'Male', 'female' => 'Female')))
-            ->add('number', 'text')
+            ->add('number', 'number')
         ;
     }
     
