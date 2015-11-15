@@ -27,13 +27,14 @@ class MakeUsersController extends Controller
     {
         $this->installUsers();
         $this->installStatuses();
+        $this->makeConnections();
     }
 
     public function installUsers(){
         $maleNames = array("Maaiz Rahim","Aayid Akram","Salaah Fadel","Raadi Zaman","Yahya Morad","Sirajuddeen Sultan","Saleem Yusuf","Salaah Hoque","Maaiz Jafari","Mushtaaq Sultan","Anwar Shahidi","Awni Ameen","Jawaad Barakat","Mamoon Bari","Hibbaan Baten","Abdul Baasid Ali","Abdul Ghafoor Kazemi","Bishr Shehata","Mujahid Rahaim","Badraan Abdullah","Anwar Shahidi","Awni Ameen","Jawaad Barakat","Mamoon Bari","Hibbaan Baten","Abdul Baasid Ali","Abdul Ghafoor Kazemi","Bishr Shehata","Mujahid Rahaim","Badraan Abdullah","Shuraih Daoud","Aiman Sabet","Sad Kamara","Munsif Hamidi","Usaama Hamed","Abdur Raqeeb Can","Muaaid Haider","Arkaan Afzal","Ashqar Hashem","Ammaar Rasul");
         $femaleNames = array("Nahla Fahmy","Umaima Rayes","Zuhra Jabbour","Laaiqa Naderi","Sitaara Hashmi","Awda Ozer","Sulama Afzal","Sanad Mahmood","Maimoona Amara","Nuha Neman","Mahdeeya Khan","Tareefa Salman","Rumaana Hadi","Qaaida Tariq","Wasmaaa Dada","Kinaana Barakat","Hadiyya Mahdi","Majeeda Mohammed","Hameeda Younan","Kawkab Vaziri","Labeeba Hamad","Tahaani Farhat","Zumruda Hussain","Nadheera Koroma","Suhaa Naim","Reema Shah","Saajida Samaan","Ameera Jamail","Almaasa Adel","Shamaail Fahs","Qamraaa Sadri","Nuzha Ghazal","Tamanna Azimi","Fareeda Kanan","Hamaama Gaber","Majeeda Hamidi","Nabeeha Suleiman","Manaara Khalil","Saaliha Abraham","Faraah Hammad");
 
-        for ($i=0; $i<10; $i++){
+        for ($i=0; $i<100; $i++){
             $user = new User();
             if ($i%2==0){
                 $male = "male";
@@ -98,6 +99,26 @@ class MakeUsersController extends Controller
                 $em->persist($status);
                 $em->flush();
             }
+        }
+     }
+
+     public function makeConnections(){
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        $allUsers = $repo->findAll();
+
+        $max = count($allUsers);
+        foreach($allUsers as $user){
+            $ab = rand(3,7);
+            for ($i=0; $i<$ab; $i++){
+                $user1 = $allUsers[rand(0,$max-1)];
+                if ($user1->getId()===$user->getId()) continue;
+                if ($user->getPeopleIFollow()->contains($user1)) continue;
+                $user->addPeopleIFollow($user1);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
         }
      }
 
