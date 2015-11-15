@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $user = $repository->findOneById($id);
-        return $this->render('AppBundle:user:profile.html.twig', array('user'->$user
+        return $this->render('AppBundle:user:profile.html.twig', array('user'=>$user
         ));
     }
 
