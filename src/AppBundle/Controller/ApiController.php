@@ -71,6 +71,7 @@ class ApiController extends Controller
                 'from' => "RAFnut",
                 'text' => $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation()
             ]);
+            $url['text'] = iconv('UTF-8', 'ASCII//TRANSLIT', $url['text']);
             try {
                 $ch = curl_init($url);
                 if (FALSE === $ch)
