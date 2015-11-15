@@ -10,7 +10,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}" />
+                           <img alt="image" class="img-circle" id="dashboardProfileImage" src="{{ app.user.picture }}" style="width:48px; height:48px;" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
@@ -24,22 +24,18 @@
                 </li>
 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
+                    <a href="{{ url('profileChange') }}"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
                 </li>
 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span> </a>
-                </li>
-
-                <li>
-                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
+                    <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
                 </li>
 
                 <li>
                     <a href="{{ url('peopleIFollow') }}"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
                 </li>
                 <li class="special_link">
-                    <a href="widgets.html"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
+                    <a href="{{ url('listPeople') }}"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
                 </li>
 
 
