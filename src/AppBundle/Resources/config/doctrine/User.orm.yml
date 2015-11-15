@@ -42,7 +42,7 @@ AppBundle\Entity\User:
       nullable: true
     picture:
       type: text
-      nullable: false
+      nullable: true
   manyToMany:
     peopleIFollow:
       targetEntity: User
