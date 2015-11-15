@@ -27,12 +27,33 @@ function initialize() {
   service.nearbySearch(request, function(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
+
         var place = results[i];
+        var icon = "";
+
+        if (place.types[0] == "mosque"){
+          icon = imgFolderEndpoint+"/img/crkva.png";
+        }
+        else if (place.types[0] == "bank" || place.types[0] == "finance"){
+          icon = imgFolderEndpoint+"/img/money.png";
+        }
+        else if (place.types[0] == "atm"){
+          icon = imgFolderEndpoint+"/img/atm.png";
+        }
+        else if (place.types[0] == "police" || place.types[0] == "local_government_office"){
+          icon = imgFolderEndpoint+"/img/police.png";
+        }
+        else if (place.types[0] == "post_office"){
+          icon = imgFolderEndpoint+"/img/post.png";
+        }
+        else if (place.types[0] == "hospital"){
+          icon = imgFolderEndpoint+"/img/hospital.png";
+        }
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
           title: place.name,
-          icon: 'https://cdn2.iconfinder.com/data/icons/icojoy/noshadow/standart/gif/24x24/001_30.gif'
+          icon: icon
         });
         markers[i] = marker;
       }
