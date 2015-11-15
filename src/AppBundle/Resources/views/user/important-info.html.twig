@@ -1,0 +1,28 @@
+{% extends 'AppBundle:user:base.html.twig' %}
+
+{% block body %}
+<div class="ibox-content">
+	<div class="google-map" id="mapOfHelpfulPlaces"></div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	{# geo-location service #}
+	<script>
+		/*
+			*Always include
+		*/
+		var _R = new _R();
+
+	</script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg3sEJRooa7jDthmCDXY9RY0EOGSTSVec&sensor=false&v=3.7&libraries=places,geometry"></script>
+  <script src="{{ asset('bundles/app/js/app/smoothscroll.js') }}"></script>
+  <script src="{{ asset('bundles/app/js/plugins/toastr/toastr.min.js') }}"></script>
+  <script src="{{ asset('bundles/app/js/app/load_useful_map.js') }}"></script>
+	<script>
+		$( document ).ready(function() {
+				initialize();
+		});
+	</script>
+{% endblock %}
