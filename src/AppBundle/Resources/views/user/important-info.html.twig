@@ -18,23 +18,23 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
                              </span> </span> </a>
-                        
+
                     </div>
                 </li>
-               
+
                 <li>
                     <a href="{{ url('updateStatus') }}"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
                 </li>
-                
+
                 <li>
                     <a href="{{ url('profileChange') }}"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
                 </li>
-                
-                
+
+
                 <li class="active">
                     <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
                 </li>
-                
+
                 <li>
                     <a href="{{ url('peopleIFollow') }}"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
                 </li>
@@ -42,8 +42,8 @@
                     <a href="{{ url('listPeople') }}"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
                 </li>
 
-               
-                
+
+
             </ul>
 
         </div>
@@ -57,7 +57,7 @@
             <form role="search" class="navbar-form-custom" method="get" action="list-people">
                 <div class="form-group">
                     <input type="text" placeholder="Search for someone..." class="form-control" name="q" id="top-search" style="width: 400%;">
-                </div>                   
+                </div>
                 <button class="hidden" type="submit" id="srrrc"><i class="fa fa-search"></i> Search</button>
 
             </form>
@@ -106,7 +106,7 @@
 
 
 	<div>
-		
+
 	</div>
 
 {% endblock %}
@@ -127,8 +127,9 @@
     <script src="{{ asset('bundles/app/js/app/load_useful_map.js') }}"></script>
 	<script>
 		$( document ).ready(function() {
+        var LatituteLast = {% laststatus.ltd %};
+        var LangituteLast = {% laststatus.lng %};
 				initialize();
 		});
 	</script>
 {% endblock %}
-

@@ -52,8 +52,8 @@
                 <div class="form-group">
                     <div class="row">
                     <div class="col-md-1" style="padding: 0px; padding-top: 6px; font-size: 16px;padding-left: 25px;">+</div>
-                    <div class="col-md-11">
-                         {{ form_widget(form.number, {"attr": {"class": "form-control", "placeholder": "38166555893", "pattern":"[0123456789]"}}) }}
+                    <div class="col-md-11" id="phoneNumberValidation">
+                         {{ form_widget(form.number, {"attr": {"class": "form-control", "placeholder": "38166555893"}}) }}
                     </div>
                     </div>
                 </div>
@@ -74,4 +74,17 @@
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+  <script>
+  $('#phoneNumberValidation input').keypress(function(e)
+               {
+                 var key_codes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 8];
+
+                 if (!($.inArray(e.which, key_codes) >= 0)) {
+                   e.preventDefault();
+                 }
+               });  </script>
 {% endblock %}
