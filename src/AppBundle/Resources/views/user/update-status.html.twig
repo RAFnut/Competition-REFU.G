@@ -10,7 +10,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small_male.png') }}" />
+                            <img alt="image" class="img-circle" id="dashboardProfileImage" src="{{ app.user.picture }}" style="width:48px; height:48px;" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
