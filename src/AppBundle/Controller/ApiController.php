@@ -52,6 +52,7 @@ class ApiController extends Controller
                 $pool[] = $user;
             }
         }
+        var_dump("expression");
         var_dump($pool);
         var_dump($radsads);
         $json = $request->request->get('status');
