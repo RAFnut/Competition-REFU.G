@@ -1,5 +1,7 @@
 AppBundle\Entity\User:
   type: entity
+  constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: url
   id:
     id:
       type: integer
@@ -39,9 +41,8 @@ AppBundle\Entity\User:
       length: 32
       nullable: true
     picture:
-      type: string
-      length: 32
-      nullable: true
+      type: text
+      nullable: false
   manyToMany:
     peopleIFollow:
       targetEntity: User

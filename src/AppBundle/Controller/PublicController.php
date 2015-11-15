@@ -6,9 +6,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+
+use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\Debug\ErrorHandler;
 
 class PublicController extends Controller
 {
@@ -70,9 +74,13 @@ class PublicController extends Controller
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
-            $em->persist($user);
-            $em->flush();
-
+            try {
+                $em->persist($user);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                return new JsonResponse("Username vec postoji. Pokusajte ponovo.");
+                                
+            }
             return $this->redirect($this->generateUrl('app_home'));        
         }
 
