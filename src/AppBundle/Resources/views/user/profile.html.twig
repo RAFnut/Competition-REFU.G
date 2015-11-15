@@ -32,7 +32,7 @@
                 </li>
 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
+                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important places</span> </a>
                 </li>
 
                 <li>
@@ -154,7 +154,7 @@
     var _R = new _R();
     {% if user.statuses|length > 0 %}
 
-        var pyrmont = new google.maps.LatLng({{user.statuses[0].ltd}}, {{user.statuses[0].lng}} );
+        var pyrmont = new google.maps.LatLng({{user.statuses.last.ltd}}, {{user.statuses.last.lng}} );
         google.maps.event.addDomListener(window, 'load', init);
         function init() {
             var mapOptions1 = {

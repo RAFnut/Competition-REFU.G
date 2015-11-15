@@ -111,5 +111,26 @@ function initialize() {
 
 showPositionAlt(LatituteLast, LongituteLast);
 
+function getLocationFromUser() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(addLocalToMap);
+    }
+    else {
+        console.log("error");
+    }
+}
+
+function addLocalToMap(position) {
+    latitudeCord = position.coords.latitude;
+    longitudeCord = position.coords.longitude;
+    var pyrmont = new google.maps.LatLng(latitudeCord, longitudeCord);
+    var marker = new google.maps.Marker({
+      map: map,
+      position: pyrmont,
+      title: "Current location"
+    });
+  }
+
+getLocationFromUser();
 
 }
