@@ -100,8 +100,8 @@ class UserController extends Controller
             //ako je samo jedan pojam unesen, mora biti tacan
             if ($max===1){
                 foreach ($allUsers as $users){
-                    $fullString = $users->getUsername() + $users->getEmail() + $users->getNumber() + $users->getDob() + $users->getFullName() + $users->getGender();
-                    if (strpos($fullString, $parts[0]){
+                    $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
+                    if (strpos($fullString, $parts[0])){
                         $results[] = $users;
                     }
                 }
@@ -111,9 +111,9 @@ class UserController extends Controller
             if ($max>1){
                 foreach ($allUsers as $users){
                     $c = 0;
-                    $fullString = $users->getUsername() + $users->getEmail() + $users->getNumber() + $users->getDob() + $users->getFullName() + $users->getGender();
+                    $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
                     foreach ($parts as $part){
-                        if (strpos($fullString, $part){
+                        if (strpos($fullString, $part)){
                             $c++;
                         }
                     }
@@ -123,6 +123,8 @@ class UserController extends Controller
                 }
             }
         }
+
+        var_dump($results);
 
         return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results
         ));
