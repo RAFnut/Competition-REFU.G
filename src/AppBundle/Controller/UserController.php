@@ -100,7 +100,7 @@ class UserController extends Controller
         $string = $request->query->get('q');
 
         if (!($string)){
-            return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$allUsers));
+            return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$allUsers, 'query'=>''));
         }
 
         $parts = explode(" ", $string);
