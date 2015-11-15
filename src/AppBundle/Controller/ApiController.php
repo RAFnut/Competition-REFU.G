@@ -100,7 +100,7 @@ class ApiController extends Controller
         $id = $request->query->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
-        
+
         if (!($otherUser)){
             return new JsonResponse("No user with that id");
         }
@@ -129,14 +129,14 @@ class ApiController extends Controller
         $id = $request->query->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
-        
+
         if (!($otherUser)){
             return new JsonResponse("No user with that id");
         }
         $user = $this->getUser();
 
         $nest = $user->getPeopleIFollow();
-        
+
         if ($nest->contains($otherUser)){
             $em = $this->getDoctrine()->getManager();
 
@@ -155,10 +155,10 @@ class ApiController extends Controller
     */
     public function pictureUploadAction(Request $request)
     {
-        $uri = $request->query->get('uri');
+        $uri = $request->request->get('uri');
 
         $user = $this->getUser();
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $user->setPicture($uri);

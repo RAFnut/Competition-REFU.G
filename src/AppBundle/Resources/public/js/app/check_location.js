@@ -154,6 +154,6 @@ function updateStatusSuccess(){
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   };
-  toastr.success('Without any options','Simple notification!');
+  toastr.success('Success!','Your status has been successfully updated! We will send an SMS message to your friends and family!');
   $("#updateStatusTextarea").val("");
 }
