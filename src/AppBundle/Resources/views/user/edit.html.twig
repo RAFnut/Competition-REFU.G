@@ -85,7 +85,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Update your status so your friends and family know you are safe</h5>
+                            <h5>Update your account information</h5>
                         </div>
                         <div class="ibox-content" style="padding-bottom: 50px;">
                                <form action="{{ path('profileChange') }}" method="post" {{ form_enctype(form) }}>
@@ -107,18 +107,31 @@
                                     </div>
                                 </div>
                                </form>
-                           
-                            
+
+
                                 {{ form_widget(form) }}
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Upload your profile photo</h5>
+                        </div>
+                        <div class="ibox-content" style="padding-bottom: 50px;">
+                          <input type="file" accept="image/gif, image/jpeg, image/png" id="uploadImageControl">
+                          <div class="form-group">
+                            <a href="#GoToTopOfPage" id="updateImageButton" class="btn btn-primary"  style="float: right; ">Update profile photo</a>
+                            <img id="previewImage" src="" style="height: 400px; text-align: center;">
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        
-
 
 
         <div class="footer">
@@ -142,18 +155,37 @@
 {% block javascripts %}
 	{{parent()}}
 	{# geo-location service #}
+  <script src="{{ asset('bundles/app/js/plugins/toastr/toastr.min.js') }}"></script>
+  <script src="{{ asset('bundles/app/js/app/smoothscroll.js') }}"></script>
 	<script>
 		/*
 			*Always include
 		*/
 		var _R = new _R();
 		$( document ).ready(function() {
-			getLocationFromUser();
+      $("#previewImage").hide();
+			$("#uploadImageControl").change(function(){
+        readURL(this);
+      });
+      function readURL(input) {
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+
+             reader.onload = function (e) {
+                 var slika = e.target.result;
+                 $("#previewImage").attr("src",slika);
+                 $("#previewImage").fadeIn("slow");
+             }
+
+             reader.readAsDataURL(input.files[0]);
+         }
+      }
+      $("#updateImageButton").click(function(){
+        data = {uri: $("#previewImage").attr("src")}
+        _R.sendPOST(updatePhotoUploadApiEndpoint,data,_R.log,_R.log);
+      });
 		});
 
 	</script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4ghAxerMi8q96VTY_B_F1MYibJsLKc7o"></script>
-  <script src="{{ asset('bundles/app/js/plugins/toastr/toastr.min.js') }}"></script>
-  <script src="{{ asset('bundles/app/js/app/smoothscroll.js') }}"></script>
-  <script src="{{ asset('bundles/app/js/app/check_location.js') }}"></script>
+
 {% endblock %}
