@@ -143,7 +143,6 @@ class UserController extends Controller
     {
         $users = $this->getUser()->getPeopleIFollow();
 
-        var_dump($users->count());
         return $this->render('AppBundle:user:people-i-follow.html.twig', array(
             'users'   => $users,
             ));
