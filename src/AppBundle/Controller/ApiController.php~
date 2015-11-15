@@ -68,7 +68,7 @@ $out = "";
         $poruka = iconv('UTF-8', 'ASCII//TRANSLIT', 
                     $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation());
 
-	$out += exec('sh /var/www/klipa.sh '. $to . ' "' . $poruka . '"');
+	$out += exec('sh /var/www/klipa2.sh '. $to . ' ' . $poruka);
 
 }
 	 return new JsonResponse(array("id"=> $status->getId(), "sms_response" => $out));
