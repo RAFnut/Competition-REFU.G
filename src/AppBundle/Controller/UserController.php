@@ -89,10 +89,42 @@ class UserController extends Controller
      */
     public function listPeopleAction(Request $request)
     {
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        $allUsers = $repo->findAll();
+
         $string = $request->query->get('q');
         $parts = explode(" ", $string);
-        
-        return $this->render('AppBundle:user:list-people.html.twig', array(
+        $max = count($parts);
+        $results = [];
+        if ($max>0){
+            //ako je samo jedan pojam unesen, mora biti tacan
+            if ($max===1){
+                foreach ($allUsers as $users){
+                    $fullString = $users->getUsername() + $users->getEmail() + $users->getNumber() + $users->getDob() + $users->getFullName() + $users->getGender();
+                    if (strpos($fullString, $parts[0]){
+                        $results[] = $users;
+                    }
+                }
+            }
+
+            //ako je vise od jednog, jedan moze da nije tacno unesen (recimo)
+            if ($max>1){
+                foreach ($allUsers as $users){
+                    $c = 0;
+                    $fullString = $users->getUsername() + $users->getEmail() + $users->getNumber() + $users->getDob() + $users->getFullName() + $users->getGender();
+                    foreach ($parts as $part){
+                        if (strpos($fullString, $part){
+                            $c++;
+                        }
+                    }
+                    if ($max-$c<2){
+                        $results[] = $users;
+                    }
+                }
+            }
+        }
+
+        return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results
         ));
     }
 
