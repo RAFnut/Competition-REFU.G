@@ -15,7 +15,7 @@
             <p>Create account to see it in action.</p>
             <form class="m-t" role="form" action="{{ path('register') }}" method="post" {{ form_enctype(form) }}>
                 <div class="form-group">
-                    {{ form_widget(form.username, {"attr": {"class": "form-control", "placeholder": "Name"}}) }}
+                    {{ form_widget(form.username, {"attr": {"class": "form-control", "placeholder": "Username"}}) }}
                 </div>
                 <div class="form-group">
                     {{ form_widget(form.password.first, {"attr": {"class": "form-control", "placeholder": "Password"}}) }}
