@@ -17,6 +17,10 @@
                 <div class="form-group">
                     {{ form_widget(form.username, {"attr": {"class": "form-control", "placeholder": "Username"}}) }}
                 </div>
+                 <div class="form-group">
+                    {{ form_widget(form.email, {"attr": {"class": "form-control", "placeholder": "E-Mail"}}) }}
+                </div>
+                
                 <div class="form-group">
                     {{ form_widget(form.password.first, {"attr": {"class": "form-control", "placeholder": "Password"}}) }}
                 </div>
@@ -41,8 +45,9 @@
                 </div>
                 
                 <div class="form-group">
-                    {{ form_widget(form.email, {"attr": {"class": "form-control", "placeholder": "E-Mail"}}) }}
+                    {{ form_widget(form.gender, {"attr": {"class": "form-control", "placeholder": "Mobile Phone Number"}}) }}
                 </div>
+                
                 
                 <div class="form-group">
                     {{ form_widget(form.number, {"attr": {"class": "form-control", "placeholder": "Mobile Phone Number"}}) }}
