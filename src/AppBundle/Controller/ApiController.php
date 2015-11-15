@@ -54,4 +54,27 @@ class ApiController extends Controller
         return new JsonResponse('{id: '.$status->getId().'}');
     }
 
+    /**
+     * @Route("/subscribe", name="subscribe")
+     */
+    public function subscribeAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $otherUser = $repository->findOneById($id);
+        
+        if (!($otherUser)){
+            return new JsonResponse("No user with that id");
+        }
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $otherUser->addPeopleIFollow($user);
+
+        $em->persist($otherUser);
+        $em->flush();
+        return new JsonResponse("Success");
+    }
+
 }
