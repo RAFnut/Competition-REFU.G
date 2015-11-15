@@ -113,7 +113,7 @@ class UserController extends Controller
             if ($max===1){
                 foreach ($allUsers as $users){
                     $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
-                    if (strpos($fullString, $parts[0]) !== false){
+                    if (stripos($fullString, $parts[0]) !== false){
                         if ($user->getId() === $users->getId()) continue;
                         $results[] = $users;
                     }
@@ -126,7 +126,7 @@ class UserController extends Controller
                     $c = 0;
                     $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
                     foreach ($parts as $part){
-                        if (strpos($fullString, $part) !== false){
+                        if (stripos($fullString, $part) !== false){
                             $c++;
                         }
                     }
