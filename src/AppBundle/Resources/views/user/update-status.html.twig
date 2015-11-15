@@ -10,7 +10,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small_male.png') }}" />
+                            <img alt="image" class="img-circle" id="dashboardProfileImage" src="{{ app.user.picture }}" style="width:48px; height:48px;" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
@@ -28,14 +28,14 @@
                 </li>
 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
+                    <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
                 </li>
 
                 <li>
                     <a href="{{ url('peopleIFollow') }}"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
                 </li>
                 <li class="special_link">
-                    <a href="widgets.html"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
+                    <a href="{{ url('listPeople') }}"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
                 </li>
 
 
@@ -50,15 +50,18 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+
+            <form role="search" class="navbar-form-custom" method="get" action="list-people">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search" style="width: 400%;">
-                </div>
+                    <input type="text" placeholder="Search for someone..." class="form-control" name="q" id="top-search" style="width: 400%;">
+                </div>                   
+                <button class="hidden" type="submit" id="srrrc"><i class="fa fa-search"></i> Search</button>
+
             </form>
         </div>
             <ul class="nav navbar-top-links navbar-right">
                <li>
-                   <button class="btn btn-primary" type="submit" style=" margin-top: -5px;"><i class="fa fa-search"></i> Search</button>
+                   <button class="btn btn-primary" type="submit" style=" margin-top: -5px;" onclick="$('#srrrc').click()"><i class="fa fa-search"></i> Search</button>
                 </li>
                 <li>
                     <a href="{{ url('logout') }}">
