@@ -89,6 +89,9 @@ class UserController extends Controller
      */
     public function listPeopleAction(Request $request)
     {
+        $string = $request->query->get('q');
+        $parts = explode(" ", $string);
+        
         return $this->render('AppBundle:user:list-people.html.twig', array(
         ));
     }
