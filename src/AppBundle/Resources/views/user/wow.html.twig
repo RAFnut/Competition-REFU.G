@@ -2,6 +2,38 @@
 
 {% block body %}
 
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2 style="margin-top:25px;">Wow?</h2>
+  </div>
+  <div class="col-lg-2">
+
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+              <div class="google-map" id="mapOfWow" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
+{% block javascripts %}
+	{{parent()}}
+  <script>
+    /*
+      *Always include
+    */
+    var _R = new _R();
+  </script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg3sEJRooa7jDthmCDXY9RY0EOGSTSVec&sensor=false&v=3.7&libraries=places,geometry"></script>
+  <script src="{{ asset('bundles/app/js/app/smoothscroll.js') }}"></script>
+  <script src="{{ asset('bundles/app/js/plugins/toastr/toastr.min.js') }}"></script>
+  <script src="{{ asset('bundles/app/js/app/wow.js') }}"></script>
+  <script>
 
+  </script>
+{% endblock %}
