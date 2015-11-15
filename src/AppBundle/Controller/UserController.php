@@ -48,7 +48,7 @@ class UserController extends Controller
         $qb->andWhere('s.user = :id');
         $qb->setParameter('id', $this->getUser());
 
-        $statuses = $qb->getQuery()->getResult(); 
+        $statuses = $qb->getQuery()->getResult();
         return $this->render('AppBundle:user:update-status.html.twig', array(
             "statuses" => $statuses,
         ));
@@ -128,7 +128,7 @@ class UserController extends Controller
         }
         //var_dump($results);
 
-        return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results
+        return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results, 'query'=>$string
         ));
     }
 
@@ -152,15 +152,15 @@ class UserController extends Controller
     {
         $user = $this->getUser();
         $form = $this->createUserForm($user);
-        $form->handleRequest($request); 
+        $form->handleRequest($request);
 
         if ($form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($user);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profileChange'));        
+            return $this->redirect($this->generateUrl('profileChange'));
         }
 
         return $this->render('AppBundle:user:edit.html.twig', array(
@@ -181,6 +181,6 @@ class UserController extends Controller
     }
 
     public function findNews($name){
-        
+
     }
 }
