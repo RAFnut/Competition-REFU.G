@@ -10,7 +10,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}" />
+                             <img alt="image" class="img-circle" id="dashboardProfileImage" src="{{ app.user.picture }}" style="width:48px; height:48px;" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
@@ -19,29 +19,24 @@
                     </div>
                 </li>
                
-                <li>
+               <li>
                     <a href="{{ url('updateStatus') }}"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
                 </li>
-                
+
                 <li>
-                    <a href="widgets.html"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
+                    <a href="{{ url('profileChange') }}"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
                 </li>
-                
+
                 <li>
-                    <a href="widgets.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span> </a>
+                    <a href="{{ url('importantInfo') }}"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
                 </li>
-                
-                <li>
-                    <a href="widgets.html"><i class="fa fa-circle"></i> <span class="nav-label">Important things</span> </a>
-                </li>
-                
+
                 <li class="active">
                     <a href="{{ url('peopleIFollow') }}"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
                 </li>
                 <li class="special_link">
-                    <a href="widgets.html"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
+                    <a href="{{ url('listPeople') }}"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
                 </li>
-
                
                 
             </ul>
@@ -53,15 +48,18 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+
+            <form role="search" class="navbar-form-custom" method="get" action="list-people">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search" style="width: 400%;">
-                </div>
+                    <input type="text" placeholder="Search for someone..." class="form-control" name="q" id="top-search" style="width: 400%;">
+                </div>                   
+                <button class="hidden" type="submit" id="srrrc"><i class="fa fa-search"></i> Search</button>
+
             </form>
         </div>
             <ul class="nav navbar-top-links navbar-right">
-                <li>
-                   <button class="btn btn-primary hidden-md hidden-xs" type="submit" style=" margin-top: -5px;"><i class="fa fa-search"></i> Search</button>
+               <li>
+                   <button class="btn btn-primary" type="submit" style=" margin-top: -5px;" onclick="$('#srrrc').click()"><i class="fa fa-search"></i> Search</button>
                 </li>
                 <li>
                     <a href="{{ url('logout') }}">
@@ -78,19 +76,23 @@
                 </div>
             </div>
         <div class="wrapper wrapper-content animated fadeInRight">
+
+        {% for user in users %}
+            {% if loop.index0 % 3 == 0 %}
         <div class="row">
+            {% endif %}
             <div class="col-lg-4">
                 <div class="contact-box">
-                    <a href="profile.html">
+                    <a href="profile/{{user.id}}">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
+                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ user.picture }}">
                             </div>
                         </div>
                         <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
+                                    <h3><a href="profile/{{user.id}}" >{{ user.fullname }}</a></h3>
+                                    <a href="profile/{{user.id}}" class="search-link"><i class="fa fa-map-marker"></i> Last checked location: <strong> {% if user.statuses|length > 0 %}{{ user.statuses[0].location }}{% else %}N/A{% endif %} </strong></a>
 
                         </div>
                     </div>
@@ -98,147 +100,10 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
+            {% if loop.index0 % 3 == 0 %}
         </div>
-        
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
+            {% endif %}
+        {% endfor %}
         
         
         

@@ -48,7 +48,7 @@ class UserController extends Controller
         $qb->andWhere('s.user = :id');
         $qb->setParameter('id', $this->getUser());
 
-        $statuses = $qb->getQuery()->getResult(); 
+        $statuses = $qb->getQuery()->getResult();
         return $this->render('AppBundle:user:update-status.html.twig', array(
             "statuses" => $statuses,
         ));
@@ -70,6 +70,7 @@ class UserController extends Controller
     public function importantInfoAction(Request $request)
     {
         return $this->render('AppBundle:user:important-info.html.twig', array(
+            'lastStatus' => $this->getUser()->getStatuses()->last()
         ));
     }
 
@@ -83,7 +84,9 @@ class UserController extends Controller
 
         if (!($user)) $user=$this->getUser();
 
-        return $this->render('AppBundle:user:profile.html.twig', array('user'=>$user
+        return $this->render('AppBundle:user:profile.html.twig', array(
+            'user' => $user,
+            'subscribed' => $this->getUser()->getPeopleIFollow()->contains($user)
         ));
     }
 
@@ -100,7 +103,7 @@ class UserController extends Controller
         $string = $request->query->get('q');
 
         if (!($string)){
-            return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$allUsers));
+            return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$allUsers, 'query'=>''));
         }
 
         $parts = explode(" ", $string);
@@ -137,7 +140,7 @@ class UserController extends Controller
         }
         //var_dump($results);
 
-        return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results
+        return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results, 'query'=>$string
         ));
     }
 
@@ -148,7 +151,6 @@ class UserController extends Controller
     {
         $users = $this->getUser()->getPeopleIFollow();
 
-        var_dump($users->count());
         return $this->render('AppBundle:user:people-i-follow.html.twig', array(
             'users'   => $users,
             ));
@@ -161,15 +163,15 @@ class UserController extends Controller
     {
         $user = $this->getUser();
         $form = $this->createUserForm($user);
-        $form->handleRequest($request); 
+        $form->handleRequest($request);
 
         if ($form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($user);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profileChange'));        
+            return $this->redirect($this->generateUrl('profileChange'));
         }
 
         return $this->render('AppBundle:user:edit.html.twig', array(
@@ -190,6 +192,6 @@ class UserController extends Controller
     }
 
     public function findNews($name){
-        
+
     }
 }
