@@ -115,8 +115,9 @@
                     <p class="small"> Full name: {{user.fullname}}</p>
                     <p class="small"> Username: {{user.username}}</p>
                     <p class="small"> Date of birth: {{user.dob | date("m/d/Y") }}</p>
-
-                    <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 20px;">Subscribe</button>
+                    {% if app.user.id != user.id %}
+                      <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 20px;">Subscribe</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
