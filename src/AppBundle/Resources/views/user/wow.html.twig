@@ -40,7 +40,7 @@
       {% if user.statuses | length > 0%}
       [
       {% for status in user.statuses %}
-        {lat: {{status.ltd}}, lng: {{status.lng}} },
+        {lat: {{status.ltd}}, lng: {{status.lng}}, date: {% if status.date < date('-5days') %}"fresh"{% else %}"notfresh"{% endif %}},
       {% endfor %}
       ],
       {% endif %}
@@ -50,12 +50,22 @@
     $(document).ready(function(){
       initialize();
       for(i=0; i<allPaths.length; i++){
+        console.log(allPaths[i][0].date);
+
+        if (allPaths[i][0].date == "fresh"){
+          opacity = 1.0;
+          stroke = "#FF0000";
+        }
+        else {
+          opacity = 0.5;
+          stroke = "#FFE200";
+        }
         var Path = new google.maps.Polyline({
           path: allPaths[i],
           geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
+          strokeColor: stroke,
+          strokeOpacity: opacity,
+          strokeWeight: 1
         });
         Path.setMap(map);
         for (j=0; j<allPaths[i].length; j++){

@@ -20,7 +20,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('updateStatus') }}"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
+                    <a href="{{ url('upStatus') }}"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
                 </li>
 
                 <li>
@@ -53,7 +53,7 @@
             <form role="search" class="navbar-form-custom" method="get" action="{{url('listPeople')}}">
                 <div class="form-group">
                     <input type="text" placeholder="Search for someone..." class="form-control" name="q" id="top-search" style="width: 400%;">
-                </div>                   
+                </div>
                 <button class="hidden" type="submit" id="srrrc"><i class="fa fa-search"></i> Search</button>
 
             </form>
@@ -95,7 +95,7 @@
                                             </a>
                                             <div class="media-body ">
                                                 <strong>{{ user.fullname }}</strong> updated his status near <strong> {{status.location}}</strong><br>
-                                                <small class="text-muted">{{status.date | date}}</small>
+                                                <small class="text-muted">{{status.date | date("m/d/Y")}}</small>
                                                 <div class="well">
                                                   {{status.note}}
                                                 </div>
