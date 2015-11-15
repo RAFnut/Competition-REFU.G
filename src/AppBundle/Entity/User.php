@@ -15,17 +15,12 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->salt = md5(uniqid(null, true));
+        $this->statuses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->peopleIFollow = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-    /****************/
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
     /**
-     * @return Role[] The user roles
-     */
+    * @return Role[] The user roles
+    */
     public function getRoles()
     {
         return array('ROLE_USER');
@@ -45,6 +40,7 @@ class User implements UserInterface, \Serializable
         list($this->id) = unserialize($serialized);
     }
 
+    /****************/
     /**
      * @var integer
      */
@@ -65,83 +61,13 @@ class User implements UserInterface, \Serializable
      */
     private $salt;
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return Admin
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Admin
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return Admin
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
     /**
      * @var string
      */
     private $full_name;
 
     /**
-     * @var string
+     * @var \DateTime
      */
     private $dob;
 
@@ -165,6 +91,97 @@ class User implements UserInterface, \Serializable
      */
     private $picture;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $statuses;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $peopleIFollow;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
 
     /**
      * Set fullName
@@ -193,7 +210,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set dob
      *
-     * @param string $dob
+     * @param \DateTime $dob
      *
      * @return User
      */
@@ -207,7 +224,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get dob
      *
-     * @return string
+     * @return \DateTime
      */
     public function getDob()
     {
@@ -309,89 +326,6 @@ class User implements UserInterface, \Serializable
     {
         return $this->picture;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $peopleIFollow;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $peopleFollowMe;
-
-
-    /**
-     * Add peopleIFollow
-     *
-     * @param \AppBundle\Entity\User $peopleIFollow
-     *
-     * @return User
-     */
-    public function addPeopleIFollow(\AppBundle\Entity\User $peopleIFollow)
-    {
-        $this->peopleIFollow[] = $peopleIFollow;
-
-        return $this;
-    }
-
-    /**
-     * Remove peopleIFollow
-     *
-     * @param \AppBundle\Entity\User $peopleIFollow
-     */
-    public function removePeopleIFollow(\AppBundle\Entity\User $peopleIFollow)
-    {
-        $this->peopleIFollow->removeElement($peopleIFollow);
-    }
-
-    /**
-     * Get peopleIFollow
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPeopleIFollow()
-    {
-        return $this->peopleIFollow;
-    }
-
-    /**
-     * Add peopleFollowMe
-     *
-     * @param \AppBundle\Entity\User $peopleFollowMe
-     *
-     * @return User
-     */
-    public function addPeopleFollowMe(\AppBundle\Entity\User $peopleFollowMe)
-    {
-        $this->peopleFollowMe[] = $peopleFollowMe;
-
-        return $this;
-    }
-
-    /**
-     * Remove peopleFollowMe
-     *
-     * @param \AppBundle\Entity\User $peopleFollowMe
-     */
-    public function removePeopleFollowMe(\AppBundle\Entity\User $peopleFollowMe)
-    {
-        $this->peopleFollowMe->removeElement($peopleFollowMe);
-    }
-
-    /**
-     * Get peopleFollowMe
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPeopleFollowMe()
-    {
-        return $this->peopleFollowMe;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $statuses;
-
 
     /**
      * Add status
@@ -426,4 +360,39 @@ class User implements UserInterface, \Serializable
     {
         return $this->statuses;
     }
+
+    /**
+     * Add peopleIFollow
+     *
+     * @param \AppBundle\Entity\User $peopleIFollow
+     *
+     * @return User
+     */
+    public function addPeopleIFollow(\AppBundle\Entity\User $peopleIFollow)
+    {
+        $this->peopleIFollow[] = $peopleIFollow;
+
+        return $this;
+    }
+
+    /**
+     * Remove peopleIFollow
+     *
+     * @param \AppBundle\Entity\User $peopleIFollow
+     */
+    public function removePeopleIFollow(\AppBundle\Entity\User $peopleIFollow)
+    {
+        $this->peopleIFollow->removeElement($peopleIFollow);
+    }
+
+    /**
+     * Get peopleIFollow
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPeopleIFollow()
+    {
+        return $this->peopleIFollow;
+    }
 }
+

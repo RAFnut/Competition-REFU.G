@@ -27,6 +27,21 @@ class Status
      */
     private $ltd;
 
+    /**
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
+     * @var string
+     */
+    private $location;
+
+    /**
+     * @var \AppBundle\Entity\User
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -109,85 +124,53 @@ class Status
     {
         return $this->ltd;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $cities;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->cities = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add city
+     * Set date
      *
-     * @param \AppBundle\Entity\City $city
+     * @param \DateTime $date
      *
      * @return Status
      */
-    public function addCity(\AppBundle\Entity\City $city)
+    public function setDate($date)
     {
-        $this->cities[] = $city;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Remove city
+     * Get date
      *
-     * @param \AppBundle\Entity\City $city
+     * @return \DateTime
      */
-    public function removeCity(\AppBundle\Entity\City $city)
+    public function getDate()
     {
-        $this->cities->removeElement($city);
+        return $this->date;
     }
 
     /**
-     * Get cities
+     * Set location
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCities()
-    {
-        return $this->cities;
-    }
-    /**
-     * @var \AppBundle\Entity\City
-     */
-    private $city;
-
-    /**
-     * @var \AppBundle\Entity\User
-     */
-    private $user;
-
-
-    /**
-     * Set city
-     *
-     * @param \AppBundle\Entity\City $city
+     * @param string $location
      *
      * @return Status
      */
-    public function setCity(\AppBundle\Entity\City $city = null)
+    public function setLocation($location)
     {
-        $this->city = $city;
+        $this->location = $location;
 
         return $this;
     }
 
     /**
-     * Get city
+     * Get location
      *
-     * @return \AppBundle\Entity\City
+     * @return string
      */
-    public function getCity()
+    public function getLocation()
     {
-        return $this->city;
+        return $this->location;
     }
 
     /**
@@ -213,33 +196,5 @@ class Status
     {
         return $this->user;
     }
-    /**
-     * @var \DateTime
-     */
-    private $date;
-
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Status
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
 }
+

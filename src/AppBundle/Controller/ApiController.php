@@ -40,6 +40,21 @@ class ApiController extends Controller
      */
     public function updateStatusApiAction(Request $request)
     {
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        $qb = $repo->createQueryBuilder('u');
+
+        $userId = $this->getUser()->getId();
+        $r = $qb->getQuery()->getResult();
+        $pool = [];
+
+        foreach ($r as $user) {
+            if($user->getPeopleIFollow()->contains($this->getUser())){
+                $pool[] = $user;
+            }
+        }
+        var_dump("expression");
+        var_dump($pool);
+        var_dump($radsads);
         $json = $request->request->get('status');
         $status = $this->deserialize(json_encode($json), 'AppBundle\Entity\Status');
 
@@ -51,7 +66,34 @@ class ApiController extends Controller
         $em->persist($status);
         $em->flush();
         $em->refresh($status);
-        return new JsonResponse('{id: '.$status->getId().'}');
+
+        $response = "MESSAGES OFF";
+
+        $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
+            'api_key' => "6901bcfc",
+            'api_secret' => "f9a926da",
+            'to' => $this->getUser()->getNumber(),
+            'from' => "RAFnut",
+            'text' => $status->getNote()
+        ]);
+
+        try {
+            $ch = curl_init($url);
+            if (FALSE === $ch)
+                throw new Exception('failed to initialize');
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+            if (FALSE === $response)
+                throw new \Exception(curl_error($ch), curl_errno($ch));
+        } catch(Exception $e) {
+            trigger_error(sprintf(
+                'Curl failed with error #%d: %s',
+                $e->getCode(), $e->getMessage()),
+                E_USER_ERROR);
+        }
+
+        return new JsonResponse(array("id"=> $status->getId(), "sms_response" => $response));
     }
 
     /**
