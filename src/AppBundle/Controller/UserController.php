@@ -95,7 +95,14 @@ class UserController extends Controller
         $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
         $allUsers = $repo->findAll();
 
+        $user = $this->getUser();
+
         $string = $request->query->get('q');
+
+        if (!($string)){
+            return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$allUsers, 'query'=>''));
+        }
+
         $parts = explode(" ", $string);
         $max = count($parts);
         $results = [];
@@ -105,6 +112,7 @@ class UserController extends Controller
                 foreach ($allUsers as $users){
                     $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
                     if (strpos($fullString, $parts[0]) !== false){
+                        if ($user->getId() === $users->getId()) continue;
                         $results[] = $users;
                     }
                 }
@@ -121,6 +129,7 @@ class UserController extends Controller
                         }
                     }
                     if ($max-$c<2){
+                        if ($user->getId() === $users->getId()) continue;
                         $results[] = $users;
                     }
                 }
