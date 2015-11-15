@@ -155,7 +155,7 @@ class ApiController extends Controller
     */
     public function pictureUploadAction(Request $request)
     {
-        $uri = $request->query->get('uri');
+        $uri = $request->request->get('uri');
 
         $user = $this->getUser();
         
