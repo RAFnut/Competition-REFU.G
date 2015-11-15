@@ -121,12 +121,14 @@ function reverseLookUpByCoordsAlt(results){
 
 $("#updateStatusButton").click(function(){
   var statusToPost = $("#updateStatusTextarea").val();
+  var locationToPost = $(".geo-location-current-pin-string").val();
   if (statusToPost.length > 0){
     var data = {
                "status": {
                    "ltd" : latitudeCord,
                    "lng" : longitudeCord,
-                   "note" : statusToPost
+                   "note" : statusToPost,
+                   "location" : locationToPost
                }
            };
     console.log(data);
