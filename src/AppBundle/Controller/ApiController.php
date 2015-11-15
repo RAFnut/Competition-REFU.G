@@ -90,7 +90,7 @@ class ApiController extends Controller
         }
         $poruka = iconv('UTF-8', 'ASCII//TRANSLIT', 
                     $this->getUser()->getFullName() . "\n" . $status->getNote() . "\nNear " . $status->getLocation());
-        shell_exec('sh ./sendMsg.sh '. $poruka . ' ' . $user->getNumber() .' > /dev/null 2>/dev/null &');
+        shell_exec('sh ./sendMsg.sh "'. $poruka . '" ' . $user->getNumber() .' > /dev/null 2>/dev/null &');
         return new JsonResponse(array("id"=> $status->getId(), "sms_response" => $response));
     }
 
