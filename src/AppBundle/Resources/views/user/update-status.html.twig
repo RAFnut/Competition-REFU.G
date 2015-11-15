@@ -20,7 +20,7 @@
                 </li>
                
                 <li class="active">
-                    <a href="widgets.html"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
+                    <a href="{{ url('updateStatus') }}"><i class="fa fa-home"></i> <span class="nav-label">Update</span> </a>
                 </li>
                 
                 <li>
@@ -36,7 +36,7 @@
                 </li>
                 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
+                    <a href="{{ url('peopleIFollow') }}"><i class="fa fa-group"></i> <span class="nav-label">Following</span> </a>
                 </li>
                 <li class="special_link">
                     <a href="widgets.html"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
@@ -53,7 +53,7 @@
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+            <form role="search" class="navbar-form-custom" method="post" action="search_results.html" style="width: 450%;">
                 <div class="form-group">
                     <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search">
                 </div>
