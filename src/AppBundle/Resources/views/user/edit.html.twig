@@ -1,1 +1,3 @@
-{{form_widget(form)}}
+<form action="{{ path('profileChange') }}" method="post" {{ form_enctype(form) }}>
+{{ form_widget(form) }}
+</form>

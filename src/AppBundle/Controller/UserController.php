@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
+use AppBundle\Form\EditUserType;
 
 /**
  * @Route("/app", name="app")
@@ -78,7 +78,9 @@ class UserController extends Controller
      */
     public function profileAction(Request $request, $id = -1)
     {
-        return $this->render('AppBundle:user:profile.html.twig', array(
+        $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $user = $repository->findOneById($id);
+        return $this->render('AppBundle:user:profile.html.twig', array('user'->$user
         ));
     }
 
@@ -113,22 +115,21 @@ class UserController extends Controller
 
         if ($form->isValid()){
             $em = $this->getDoctrine()->getManager();
-           
+            
             $em->persist($user);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profile'));        
+            return $this->redirect($this->generateUrl('profileChange'));        
         }
 
         return $this->render('AppBundle:user:edit.html.twig', array(
             'form'   => $form->createView(),
-            'user'   => $user,
         ));
     }
 
     private function createUserForm(User $user)
     {
-        $form = $this->createForm(new UserType(), $user, array(
+        $form = $this->createForm(new EditUserType(), $user, array(
             'action' => $this->generateUrl('profileChange'),
             'method' => 'POST',
         ));
