@@ -33,8 +33,7 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:user:index.html.twig', array(
-        ));
+        return $this->redirect($this->generateUrl('updateStatus'));
     }
 
     /**
@@ -145,7 +144,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/people-i-follow", name="peopleIFollow")
+     * @Route("/following", name="peopleIFollow")
      */
     public function peopleFollowAction(Request $request)
     {
@@ -157,7 +156,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/profileChange", name="profileChange")
+     * @Route("/profile-change", name="profileChange")
      */
     public function profileChangeAction(Request $request)
     {
