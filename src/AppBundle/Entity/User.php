@@ -2,11 +2,45 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * User
  */
-class User
+class User implements UserInterface, \Serializable
 {
+    public function __construct()
+    {
+        $this->salt = md5(uniqid(null, true));
+        $this->statuses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->peopleIFollow = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    /**
+    * @return Role[] The user roles
+    */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials(){
+
+    }
+
+    public function serialize()
+    {
+        return serialize(array($this->id));
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->id) = unserialize($serialized);
+    }
+
+    /****************/
     /**
      * @var integer
      */
@@ -66,15 +100,6 @@ class User
      * @var \Doctrine\Common\Collections\Collection
      */
     private $peopleIFollow;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->statuses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->peopleIFollow = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
