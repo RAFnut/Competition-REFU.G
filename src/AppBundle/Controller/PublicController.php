@@ -20,10 +20,8 @@ class PublicController extends Controller
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
-    {
-        return $this->render('AppBundle:public:index.html.twig', array(
-
-        ));
+    {         
+        return $this->redirect($this->generateUrl('updateStatus'));
     }
     /**
      * @Route("/post-login", name="logged_in")
@@ -84,7 +82,7 @@ class PublicController extends Controller
                 $em->persist($user);
                 $em->flush();
             } catch (\Doctrine\DBAL\DBALException $e) {
-                return new JsonResponse("Username vec postoji. Pokusajte ponovo.");
+                return new JsonResponse("Registracija nije uspela");
                                 
             }
             return $this->redirect($this->generateUrl('app_home'));        
