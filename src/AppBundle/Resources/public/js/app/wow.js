@@ -6,8 +6,9 @@ function initialize() {
   var pyrmont = new google.maps.LatLng(43.90457100430006, 20.342847634374948);
   map = new google.maps.Map(document.getElementById('mapOfWow'), {
     center: pyrmont,
-    zoom: 6,
-    scrollwheel: true
+    zoom: 4,
+    scrollwheel: true,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
   });
 /*
 
