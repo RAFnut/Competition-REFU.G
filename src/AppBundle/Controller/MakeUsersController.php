@@ -80,7 +80,15 @@ class MakeUsersController extends Controller
         $lng = array("21.893038", "20.446844", "18.680669", "19.022483", "16.000534", "15.433433", "16.388959", "13.071807", "11.556948");        
         $name = array("Nis, Serbia", "Belgrade, Serbia", "Osijek, Croatia", "Budapest, Hungary", "Zagreb, Croatia", "Graz, Austria", "Vienna, Austria", "Salzburg, Austria", "Munich, Germany");
 
-        $notes = array("");
+        $notes = array("I arrived safely! The people here are very nice, but it is a bit cold.",
+"The weather is still warm and sunny, and we have enough food. We will continue the trip on the 18th of November.",
+"Mom, I will be here for 5 days. I'll be on Skype every day from 4 to 6pm if you can come and talk to me",
+"Alli, don't go through Hungary, the roads are too dangerous right now. I would advise you to stay in Serbia. Stay safe.",
+"I reach the camp safely today. There is not much food, but we have shelter and water. Please let me know you are okay!",
+"The bus was late 2h but we reached Frankfurt finally! I will get a job soon and send for you guys. Stay safe.",
+"Me and Edin reached Serbia today via train. The people are nice and the conditions are okay.",
+"Aadil and Amir are with me, we were able to meetup in Zagreb like we planned. The border is not safe, but we have shelter and supplies. Stay safe dad!",
+"Aasif, do not go over the border yet. Keep Abdul and you sister safe. We will meet in Nish.");
 
         foreach ($allUsers as $user){
             $max = 0;
