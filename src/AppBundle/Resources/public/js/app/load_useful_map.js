@@ -2,7 +2,7 @@ var markers = [];
 var map;
 
 function initialize() {
-  var pyrmont = new google.maps.LatLng(43.33191364, 21.891987);
+  var pyrmont = new google.maps.LatLng(LatituteLast, LongituteLast);
   map = new google.maps.Map(document.getElementById('mapOfHelpfulPlaces'), {
     center: pyrmont,
     zoom: 13,
@@ -66,5 +66,50 @@ function initialize() {
       }
     }
   });
+
+  function showPositionAlt(LatituteLast, LongituteLast) {
+      latitudeCord = LatituteLast;
+      longitudeCord = LongituteLast;
+      var reverseLookUp = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+      reverseLookUp += latitudeCord+","+longitudeCord;
+      _R.sendGET(reverseLookUp, reverseLookUpByCoords, _R.log);
+  }
+
+  /*
+    * dobijeni google json pretvara u citljivu adresicu
+  */
+  function decodeLocationArray(results){
+    city = "";
+    country = "";
+    for (var i=0; i<results.results[0].address_components.length; i++) {
+      for (var b=0;b<results.results[0].address_components[i].types.length;b++) {
+        if (results.results[0].address_components[i].types[b] == "locality") {
+          if (city == "")
+            city= results.results[0].address_components[i].long_name;
+        }
+        if (results.results[0].address_components[i].types[b] == "country") {
+          if (country == "")
+            country = results.results[0].address_components[i].long_name;
+
+        }
+        if (city != "" && country != ""){
+          tempstr = city+", "+country;
+          return tempstr;
+        }
+      }
+    }
+
+    if (city == "") return country;
+    tempstr = city+", "+country;
+    return tempstr;
+  }
+
+    function reverseLookUpByCoords(results){
+      nearest = decodeLocationArray(results);
+      $('#areaName').append("("+nearest+")");
+    }
+
+showPositionAlt(LatituteLast, LongituteLast);
+
 
 }

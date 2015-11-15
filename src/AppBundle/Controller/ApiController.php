@@ -97,7 +97,7 @@ class ApiController extends Controller
      */
     public function subscribeAction(Request $request)
     {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
 
@@ -126,7 +126,7 @@ class ApiController extends Controller
      */
     public function unsubscribeAction(Request $request)
     {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
         $otherUser = $repository->findOneById($id);
 
