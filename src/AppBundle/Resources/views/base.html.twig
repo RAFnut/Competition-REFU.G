@@ -18,7 +18,10 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
          <!-- Main scripts -->
-        <script>var updateStatusApiEndpoint = "{{ url("updateStatusApi") }}";</script>
+        <script>
+        var updateStatusApiEndpoint = "{{ url("updateStatusApi") }}";
+        var imgFolderEndpoint = "{{ asset('bundles/app/') }}";
+        </script>
         <script src="{{ asset('bundles/app/js/jquery-2.1.1.js') }}"></script>
         <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
