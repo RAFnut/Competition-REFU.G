@@ -114,3 +114,44 @@ function reverseLookUpByCoordsAlt(results){
   nearest = decodeLocationArray(results);
   $('.geo-location-current-pin-string').val(nearest);
 }
+
+/*
+  * Send POST na updateStatusApiEndpoint
+*/
+
+$("#updateStatusButton").click(function(){
+  var statusToPost = $("#updateStatusTextarea").val();
+  if (statusToPost.length > 0){
+    var data = {
+               "status": {
+                   "ltd" : latitudeCord,
+                   "lng" : longitudeCord,
+                   "note" : statusToPost
+               }
+           };
+    console.log(data);
+    _R.sendPOST(updateStatusApiEndpoint, data, updateStatusSuccess, _R.log);
+  }
+});
+
+
+function updateStatusSuccess(){
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "progressBar": true,
+    "preventDuplicates": false,
+    "positionClass": "toast-top-full-width",
+    "onclick": null,
+    "showDuration": "400",
+    "hideDuration": "1000",
+    "timeOut": "7000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+  toastr.success('Without any options','Simple notification!');
+  $("#updateStatusTextarea").val("");
+}

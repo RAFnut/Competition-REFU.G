@@ -8,7 +8,9 @@
         <link href="{{ asset('bundles/app/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/app/css/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/app/css/r-style.css') }}" rel="stylesheet">
+
         <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -17,6 +19,7 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
          <!-- Main scripts -->
+        <script>var updateStatusApiEndpoint = "{{ url("updateStatusApi") }}";</script>
         <script src="{{ asset('bundles/app/js/jquery-2.1.1.js') }}"></script>
         <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>

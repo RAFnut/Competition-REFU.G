@@ -133,8 +133,6 @@ _R.prototype.sendPOST = function(apiEndpoint, data, successFunction, errorFuncti
   $.ajax({
     type: "POST",
     url: apiEndpoint,
-    contentType: "application/json",
-    dataType: "jsonp",
     data: data,
     success: function(data) {
       successFunction(data);
