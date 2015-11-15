@@ -20,10 +20,8 @@ class PublicController extends Controller
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
-    {
-        return $this->render('AppBundle:public:index.html.twig', array(
-
-        ));
+    {         
+        return $this->redirect($this->generateUrl('updateStatus'));
     }
     /**
      * @Route("/post-login", name="logged_in")
