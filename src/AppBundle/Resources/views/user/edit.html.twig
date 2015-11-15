@@ -10,7 +10,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/app/img/profile_small.jpg') }}" />
+                            <img alt="image" class="img-circle" id="dashboardProfileImage" src="{{ app.user.picture }}" style="width:48px; height:48px;" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs" style="margin-top: 10px;"> <strong class="font-bold">{{ app.user.username }}</strong>
@@ -183,8 +183,29 @@
       }
       $("#updateImageButton").click(function(){
         data = {uri: $("#previewImage").attr("src")}
-        _R.sendPOST(updatePhotoUploadApiEndpoint,data,_R.log,_R.log);
+        _R.sendPOST(updatePhotoUploadApiEndpoint,data,successPhotoChange,_R.log);
       });
+
+      function successPhotoChange(data){
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "progressBar": true,
+          "preventDuplicates": false,
+          "positionClass": "toast-top-full-width",
+          "onclick": null,
+          "showDuration": "400",
+          "hideDuration": "1000",
+          "timeOut": "7000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        };
+        toastr.success('Success','You have successfully changed your profile image');
+        $("#dashboardProfileImage").attr('src', $("#previewImage").attr("src"));
+      }
 		});
 
 	</script>
