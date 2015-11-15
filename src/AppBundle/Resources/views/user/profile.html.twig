@@ -119,8 +119,10 @@
                       <button class="btn btn-primary" type="submit"
                       style="width: 100%; margin-top: 20px;"
                       onclick="subscribeHandler();" id="subscribeButtonHandler"
-                      data-cansub=''
-                      >Subscribe</button>
+                      data-cansub= {% if subscribed == true %} 'false' {% else %} 'true' {% endif %}
+                      >
+                      {% if subscribed == true %} Unsubscribe {% else %} Subscribe {% endif %}
+                      </button>
                     {% endif %}
                 </div>
             </div>
@@ -143,12 +145,11 @@
 	</div>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4ghAxerMi8q96VTY_B_F1MYibJsLKc7o"></script>
 
-
-
 {% endblock %}
 
 {% block javascripts %}
 	{{parent()}}
+  <script src="{{ asset('bundles/app/js/plugins/toastr/toastr.min.js') }}"></script>
   <script type="text/javascript">
         var _R = new _R();
         var pyrmont = new google.maps.LatLng({{user.statuses[0].ltd}}, {{user.statuses[0].lng}} );
@@ -186,12 +187,43 @@
         }
 
         function subscribeHandler(){
-          if ($("#subscribeButtonHandler").attr('cansub') == 'yes'){
-            _R.sendPOST(subscribeApiEndPoint,{id:{{user.id}}},_R.log,_R.log);
+          if ($("#subscribeButtonHandler").data('cansub') == true){
+             _R.sendPOST(subscribeApiEndPoint,{id:{{user.id}}},followSuccess(1),_R.log);
           }
           else{
-            _R.sendPOST(unsubscribeApiEndPoint,{id:{{user.id}}},_R.log,_R.log);
+            _R.sendPOST(unsubscribeApiEndPoint,{id:{{user.id}}},followSuccess(-1),_R.log);
           }
         }
+       function followSuccess(type){
+         var successMessage = "";
+         if (type == 1){
+           successMessage = "You have successfully subscribed! ";
+           $("#subscribeButtonHandler").data('cansub', false);
+           $("#subscribeButtonHandler").empty().append("Unsubscribe");
+         }
+         else{
+           successMessage = "You have successfully unsubscribed! ";
+           $("#subscribeButtonHandler").data('cansub', true)
+           $("#subscribeButtonHandler").empty().append("Subscribe");
+         }
+         toastr.options = {
+           "closeButton": true,
+           "debug": false,
+           "progressBar": true,
+           "preventDuplicates": false,
+           "positionClass": "toast-top-full-width",
+           "onclick": null,
+           "showDuration": "400",
+           "hideDuration": "1000",
+           "timeOut": "7000",
+           "extendedTimeOut": "1000",
+           "showEasing": "swing",
+           "hideEasing": "linear",
+           "showMethod": "fadeIn",
+           "hideMethod": "fadeOut"
+         };
+         toastr.success('Success!', successMessage);
+       }
+
     </script>
 {% endblock %}
