@@ -101,7 +101,7 @@ class UserController extends Controller
             if ($max===1){
                 foreach ($allUsers as $users){
                     $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
-                    if (strpos($fullString, $parts[0])){
+                    if (strpos($fullString, $parts[0]) !== false){
                         $results[] = $users;
                     }
                 }
@@ -113,7 +113,7 @@ class UserController extends Controller
                     $c = 0;
                     $fullString = $users->getUsername() . $users->getEmail() . $users->getNumber() . $users->getFullName() . $users->getGender();
                     foreach ($parts as $part){
-                        if (strpos($fullString, $part)){
+                        if (strpos($fullString, $part) !== false){
                             $c++;
                         }
                     }
@@ -123,8 +123,7 @@ class UserController extends Controller
                 }
             }
         }
-
-        var_dump($results);
+        //var_dump($results);
 
         return $this->render('AppBundle:user:list-people.html.twig', array('users'=>$results
         ));
