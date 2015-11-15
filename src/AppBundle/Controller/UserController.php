@@ -189,6 +189,18 @@ class UserController extends Controller
 
         return $form;
     }
+    /**
+     * @Route("/wow", name="wow")
+     */
+    public function wowAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Status');
+        $statuses = $repo->findAll();
+        
+        return $this->render('AppBundle:user:wow.html.twig', array(
+            'statuses'   => $statuses,
+            ));
+    }
 
     public function findNews($name){
 
