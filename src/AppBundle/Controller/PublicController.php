@@ -78,7 +78,7 @@ class PublicController extends Controller
                 $em->persist($user);
                 $em->flush();
             } catch (\Doctrine\DBAL\DBALException $e) {
-                return new JsonResponse("Username vec postoji. Pokusajte ponovo.");
+                return new JsonResponse("Registracija nije uspela");
                                 
             }
             return $this->redirect($this->generateUrl('app_home'));        
