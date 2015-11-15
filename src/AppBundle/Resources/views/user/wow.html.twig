@@ -35,5 +35,41 @@
   <script src="{{ asset('bundles/app/js/app/wow.js') }}"></script>
   <script>
 
+    var allPaths = [
+    {% for user in users %}
+      {% if user.statuses | length > 0%}
+      [
+      {% for status in user.statuses %}
+        {lat: {{status.ltd}}, lng: {{status.lng}} },
+      {% endfor %}
+      ],
+      {% endif %}
+    {% endfor %}
+    ];
+
+    $(document).ready(function(){
+      initialize();
+      for(i=0; i<allPaths.length; i++){
+        var Path = new google.maps.Polyline({
+          path: allPaths[i],
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        Path.setMap(map);
+        for (j=0; j<allPaths[i].length; j++){
+          var marker = new google.maps.Marker({
+            map: map,
+            position:  new google.maps.LatLng(allPaths[i][j].lat, allPaths[i][j].lng),
+            icon: imgFolderEndpoint+"/img/pin.png"
+          });
+        }
+      }
+
+
+
+    });
+
   </script>
 {% endblock %}
