@@ -76,19 +76,23 @@
                 </div>
             </div>
         <div class="wrapper wrapper-content animated fadeInRight">
+
+        {% for user in users %}
+            {% if loop.index0 % 3 == 0 %}
         <div class="row">
+            {% endif %}
             <div class="col-lg-4">
                 <div class="contact-box">
-                    <a href="profile.html">
+                    <a href="profile/{{user.id}}">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
+                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ user.picture }}">
                             </div>
                         </div>
                         <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
+                                    <h3><a href="profile/{{user.id}}" >{{ user.fullname }}</a></h3>
+                                    <a href="profile/{{user.id}}" class="search-link"><i class="fa fa-map-marker"></i> Last checked location: <strong> {% if user.statuses|length > 0 %}{{ user.statuses[0].location }}{% else %}N/A{% endif %} </strong></a>
 
                         </div>
                     </div>
@@ -96,147 +100,10 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
+            {% if loop.index0 % 3 == 0 %}
         </div>
-        
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <a href="profile.html">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ asset('bundles/app/img/A4.jpg') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8" style="padding-top: 5px;">
-                            <h3><strong>John Smith</strong></h3>
-                            <p><i class="fa fa-map-marker"></i> Last checked location: <strong>Nis, Serbia</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
+            {% endif %}
+        {% endfor %}
         
         
         

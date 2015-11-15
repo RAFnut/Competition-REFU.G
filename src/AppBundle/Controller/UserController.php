@@ -83,7 +83,9 @@ class UserController extends Controller
 
         if (!($user)) $user=$this->getUser();
 
-        return $this->render('AppBundle:user:profile.html.twig', array('user'=>$user
+        return $this->render('AppBundle:user:profile.html.twig', array(
+            'user' => $user,
+            'subscribed' => $this->getUser()->getPeopleIFollow()->contains($user)
         ));
     }
 
