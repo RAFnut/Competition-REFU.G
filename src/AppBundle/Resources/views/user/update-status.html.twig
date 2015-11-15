@@ -24,11 +24,7 @@
                 </li>
 
                 <li>
-                    <a href="widgets.html"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
-                </li>
-
-                <li>
-                    <a href="widgets.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span> </a>
+                    <a href="{{ url('profileChange') }}"><i class="fa fa-user"></i> <span class="nav-label">Profile</span> </a>
                 </li>
 
                 <li>
@@ -53,9 +49,10 @@
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <form role="search" class="navbar-form-custom" id="GoToTopOfPage" method="post" action="search_results.html" style="width: 450%;">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="Search for someone..." class="form-control" name="top-search" id="top-search" style="width: 400%;">
                 </div>
             </form>
         </div>
