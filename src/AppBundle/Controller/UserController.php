@@ -70,6 +70,7 @@ class UserController extends Controller
     public function importantInfoAction(Request $request)
     {
         return $this->render('AppBundle:user:important-info.html.twig', array(
+            'lastStatus' => $this->getUser()->getStatuses()->last()
         ));
     }
 
