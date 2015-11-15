@@ -138,6 +138,8 @@ class UserController extends Controller
     public function peopleFollowAction(Request $request)
     {
         $users = $this->getUser()->getPeopleIFollow();
+
+        var_dump($users->count());
         return $this->render('AppBundle:user:people-i-follow.html.twig', array(
             'users'   => $users,
             ));
