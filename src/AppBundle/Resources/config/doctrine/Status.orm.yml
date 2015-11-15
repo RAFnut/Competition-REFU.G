@@ -21,13 +21,10 @@ AppBundle\Entity\Status:
     date:
       type: datetime
       nullable: false
+    location:
+      type: string
+      length: 100
   manyToOne:
-    city:
-      targetEntity: City
-      joinColumn:
-        name: city_id
-        referencedColumnName: id
-      inversedBy: statuses
     user:
       targetEntity: User
       joinColumn:
