@@ -149,4 +149,23 @@ class ApiController extends Controller
         return new JsonResponse("He is not subscribed");
     }
 
+    /**
+    * @Route("/picture", name="picture")
+    */
+    public function pictureUploadAction(Request $request)
+    {
+        $uri = $request->query->get('uri');
+
+        $user = $this->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $user->setPicture($uri);
+
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse("Success");
+    }
+
 }
