@@ -4,6 +4,7 @@ REGU-G: Helping Families Reunite
 During the second SICEF Hackathon we developed an application for helping refugees and won second place. The development was done in just 24 hours and the whole prototype is available:
 
 GitHub: https://github.com/RAFnut/Competition-REFU.G
+
 Live version: http://hakaton.rafnut.com/web/app.php/login
 
 Our application was accessible via the web as well as SMS which allowed refugees to communicate even if Internet access is not available.
